@@ -10,6 +10,5 @@ public class PracticeWork extends BaseClass {
     void verifyPageTitle() {
         driver.get(URL);
         assertEquals("Instant CrowdFunding", driver.getTitle());
-        driver.quit();
     }
 }

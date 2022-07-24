@@ -1,22 +1,26 @@
 package practice;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+
+import java.util.concurrent.TimeUnit;
+
 public class BaseClass {
     static WebDriver driver;
-    static String URL = "https://instantcrowdfunding.com/home";
+    public static String URL = "https://instantcrowdfunding.com/home";
 
     @BeforeMethod
     static void setUp(){
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(URL);
+        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+        ChromeOptions options = new ChromeOptions().addArguments("start-fullscreen");
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
+
     @AfterMethod
     static void cleanUp(){
         driver.quit();
